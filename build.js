@@ -23,9 +23,13 @@ const fileGroups = {
     'Neonglass_jsmods-black': ['style.css', 'fan_mod.js', 'gpu_mod.js']
 }
 
+// Load theme config
+const themeCfg = fs.readFileSync("theme.cfg", 'utf8')
+
 // Iterate through all file groups
 Object.entries(fileGroups).forEach(([groupName, files]) => {
     let combinedCSS = ''
+    let updatedThemeCfg = themeCfg.replace("{{NAME}}", groupName.split("-")[0])
 
     // Minify and combine content of each file in this group
     files.forEach(file => {
@@ -67,7 +71,7 @@ Object.entries(fileGroups).forEach(([groupName, files]) => {
     // Copy theme config to dist
     const themeCfgFileName = `${groupName}.cfg`
     const themeCfgFilePath = path.join(distDir, themeCfgFileName)
-    fs.copyFileSync('theme.cfg', themeCfgFilePath);
+    fs.writeFileSync(themeCfgFilePath, updatedThemeCfg);
 
     // Create a ZIP for this group's combined file
     const zipFileName = `${groupName}.zip`
