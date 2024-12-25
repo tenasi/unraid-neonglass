@@ -1,8 +1,8 @@
-<script type="text/javascript">document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function() {
     let fan_row=$("tbody[title=\"Fan Information\"]");
 
     if (fan_row.length > 0) {
-        let fans=$("tbody[title=\"Fan Information\"]")[0].rows[1].children[0].children
+        let fans=document.querySelectorAll('tbody[title="Fan Information"]')[0].rows[1].children[0].children
         for (let i=0; i < fans.length; i++) {
             if (fans[i].textContent=="FAN 1") {
                 fans[i].textContent="CPU FAN 1";
@@ -17,11 +17,4 @@
             }
         }
     }
-
-    let gpu_bus_row=$('tr:contains("PCI Bus Rx/Tx (MB/s)")');
-
-    if (gpu_bus_row.length > 0) {
-        gpu_bus_row[0].hidden=true;
-    }
 });
-</script>
