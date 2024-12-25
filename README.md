@@ -1,48 +1,56 @@
 # Neonglass
-Neonglass is a custom unRAID theme for the use with theme-engine. The theme is based on the [work](https://forums.unraid.net/topic/127365-unraid%E4%B8%BB%E9%A2%98%EF%BC%8C-%E8%87%AA%E5%AE%9A%E4%B9%89theme-%E8%83%A1%E6%A1%83%E5%8E%9F%E7%A5%9E/) of [@zisen](https://forums.unraid.net/profile/173690-zisen/).
 
-The theme should support most plugins out of the box. Unfortunately,  it is not possible to apply theming to certain elements (e.g., textareas when editing the XML for VMs; CPU usage graph line color). However, if you do come across any other bugs, feel free to open an issue or preferably a pull request if you know how to fix it.
+Neonglass is a custom Unraid theme designed for use with the [Theme Engine](https://forums.unraid.net/topic/87126-plugin-theme-engine-a-webgui-styler/) plugin. It draws inspiration from the amazing [work](https://forums.unraid.net/topic/127365-unraid%E4%B8%BB%E9%A2%98%EF%BC%8C-%E8%87%AA%E5%AE%9A%E4%B9%89theme-%E8%83%A1%E6%A1%83%E5%8E%9F%E7%A5%9E/) of [@zisen](https://forums.unraid.net/profile/173690-zisen/).
 
+This theme supports most plugins. However, certain elements (e.g., text areas like VM XML editing, CPU usage chart colors) are not currently themeable. If you encounter additional issues, feel free to submit an issue or pull request.
 
+Neonglass comes in two versions: 
+- **CSS Only**: Provides all theme styling through CSS.
+- **CSS + JS**: Includes the following custom JavaScript:
+  - **fan_mod.js**: If you use the [Dynamix System Temperature](https://forums.unraid.net/topic/34889-dynamix-v6-plugins/) plugin with fan speed shown on the dashboard, this script renames the fans (e.g., FAN 1 → CPU FAN 1).
+  - **gpu_mod.js**: If you use the [GPU Statistics](https://forums.unraid.net/topic/89453-plugin-gpu-statistics/) plugin, this script removes the “PCI Bus Rx/Tx” row from the dashboard widget.
 
-## How to install
+These JS mods are very specific to my personal setup but may serve as a reference for further modifications.
 
-First install [theme-engine](https://forums.unraid.net/topic/87126-plugin-theme-engine-a-webgui-styler/) from the community app store. Then goto `Settings/Theme Engine` and paste the following link under the `Import Zip` section into the `From URL` field.
-```
-https://github.com/tenasi/unraid-neonglass/releases/download/1.0.0/Neonglass.zip
-```
-After this, select Neonglass from the list of saved themes and hit apply.
+## How to Install
 
+1. Install the [Theme Engine](https://forums.unraid.net/topic/87126-plugin-theme-engine-a-webgui-styler/) plugin from the Unraid Community App Store.  
+2. Copy the link of the desired release from [here](https://github.com/tenasi/unraid-neonglass/releases).  
+3. In Unraid, go to **Settings** → **Theme Engine**, then paste the link into the **From URL** field under **Import Zip**.  
+4. Select **Neonglass** from your saved themes and click **Apply**.
 
+## Editing the Theme and Installing Manually
 
-## Edit theme an install manually
+You can either:
 
-If you wish to make changes to the theme you can also download `style.css` from this repository and modify the theme to your own needs. To install your custom `style.css` go to `Settings/Theme Engine`, select `Black` under `Base Theme`. Under `Theme Settings` make sure to enable `Advanced View` and set `Enable Theme Engine` and `Enable custom styling` to `Yes`. Then paste the contents of your modified `style.css` into the section `Custom styling (advanced)` and hit apply.
+1. **Download and modify `style.css` directly:**  
+   - Download `style.css` from this repository, make your changes, then in Unraid go to **Settings** → **Theme Engine** and select **Black** as your Base Theme.  
+   - Under **Theme Settings**, enable **Advanced View**, set **Enable Theme Engine** and **Enable custom styling** to **Yes**, then paste your modified CSS into **Custom styling (advanced)** and click **Apply**.
 
-The official release only includes the minified css `minified.css`. The complete and formatted stylesheet `style.css` also includes some javascript to change the names of system fans. This is only relevant if you have the `Dynamix System Temperature` plugin installed. With this plugin you can show the RPM of recognized fans on the Dashboard. But the plugin will only show `FAN 1`, `FAN 2`, etc. If you wish to modify the names, to have to edit the javascript at the bottom of `style.css` accordingly. In my case `FAN 1` becomes `CPU FAN 1`, `FAN 2` becomes `PCH Fan` and so on.
+2. **Clone this repo and use the toolchain:**  
+   - Install Node.js and NPM.  
+   - Clone this repository and run `npm install` to install dependencies.
+   - Modify the files to your liking. ***Note**: If you add additional files in the `src` directory, make sure to include them in the `fileGroups` dictionary in the `build.js` file.*
+   - Run the build script (`npm run build`) to minify and package all files from the `src` into the `dist` directory.  
+   - Copy the resulting zip files to `config/plugins/theme.engine/themes` on your Unraid USB drive.  
+   - In **Settings** → **Theme Engine**, select the file under **From USB** and click **Import**, then choose the theme under **Saved Themes** and click **Load**.  
+
+Pull requests for additional JS mods or CSS updates are very much welcome.
 
 ## Screenshots
 
-![Alt text](screenshot01.png)
-
-![Alt text](screenshot02.png)
-
-![Alt text](screenshot03.png)
-
-![Alt text](screenshot04.png)
-
-![Alt text](screenshot05.png)
-
-
+![Unraid Neonglass Theme Dashboard](screenshot01.png)  
+![Unraid Neonglass Theme Main](screenshot02.png)  
+![Unraid Neonglass Theme Settings](screenshot03.png)  
+![Unraid Neonglass Theme VM Editor](screenshot04.png)  
+![Unraid Neonglass Theme App Store](screenshot05.png)
 
 ## Known Issues
-- Styling of large textareas (e.g. VM XML Advanced View, User Scripts, Plugin Install Popup)
-- NerdTools Table (could be fixed, but not a priority for me)
-- Text color of uptime and unRAID License in the top right corner
-- unRAID logo in the top right corner (color can be modified by appliying filters, but not configured directly)
-- Line colors of charts (e.g. CPU utilization, network utilization)
 
-
+- Styling large text areas (e.g., VM XML, User Scripts, Plugin Install Popup)  
+- NerdTools table  
+- Chart line colors (e.g., CPU, network, system storage and memory)
 
 ## Future Plans
-I plan to maintain this theme as long as I actively  use unRAID. In addition, I have been playing around with custom plugins for a while now and I may create a standalone plugin to install this theme without `theme-engine` and ideally include some specific settings to enable some features or change variables. Any know how in plugin creation is greatly appreciated.
+
+I plan to maintain this theme as long as I use Unraid. I’m also considering a standalone plugin that installs Neonglass without `theme-engine`, potentially offering additional configuration options. Any plugin creation expertise is greatly appreciated.
