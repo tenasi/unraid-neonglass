@@ -1,0 +1,14 @@
+{
+  "name": "unraid-neonglass",
+  "version": "1.0.0",
+  "description": "A modern colorful theme for unraid web UI.",
+  "scripts": {
+    "build": "node build.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "archiver": "^7.0.1",
+    "html-minifier": "^4.0.0"
+  }
+}
