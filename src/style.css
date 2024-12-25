@@ -851,11 +851,6 @@ dt {
     background-color: #007bff !important;
 }
 
-vue-userprofile,
-unraid-user-profile {
-    filter: invert(1);
-}
-
 .fa-plus-square,
 .fa-minus-square,
 .fa-unlock,
@@ -904,6 +899,19 @@ table.share_status.dashboard tbody {
 .nav-item:hover:after,
 .nav-user.show:hover:after {
     background-color: #007bff;
+}
+
+table.dashboard {
+    background-color: transparent;
+}
+
+table.dashboard tbody {
+    border: none;
+    background: rgb(0 0 0 / 25%);
+}
+
+table.dashboard td.stopgap {
+    background-color: transparent;
 }
 
 </style><script type="text/javascript">document.addEventListener("DOMContentLoaded", function() {
